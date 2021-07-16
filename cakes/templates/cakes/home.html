@@ -1,0 +1,140 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css" integrity="sha384-wESLQ85D6gbsF459vf1CiZ2+rr+CsxRY0RpiF1tLlQpDnAgg6rwdsUF1+Ics2bni" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <title>Brijo Cakes</title>
+    <style>
+      .jumbotron {
+          background: url("{%static 'img/cake.jpg'%}") center center / cover no-repeat;
+      }
+    </style>
+</head>
+<body>
+  <!--Header-->
+  <div class="header">
+    <div class="menu-bar">
+      <nav class="navbar sticky-top fixed-top navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#">Sweet Delight</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Home </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contact Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#products">Our Products</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Disabled</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+        
+
+    </div>
+  </div>
+  <!--header end-->
+  <!--Jumbotron-->
+  <div class="jumbotron">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+         
+        </div>
+        <div class="col-md-8">
+          <h1 class="display-4">Hello, world!</h1>
+          <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+          <hr class="my-4">
+          <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Jumbotron end-->
+  <!-- card-section -->
+  <div class="container-fluid justify-content-md-center" id="products" style="position: relative ">
+    <div class="row mx-3">
+     
+        {% for object in object_list %}
+        <div class="col-md-4 pt-2">
+          <div class="card">  
+            <img src="{{ object.image.url }}" class="card-img-top img-fluid" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{ object.name }}</h5>
+              <p class="card-text">{{ object.description }}</p>
+             
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+    </div>
+  </div>
+  <br>
+  <!--pagination-->
+  <div class="d-flex justify-content-center">
+    Page {{page_obj.number }} of {{ page_obj.paginator.num_pages }}
+  </div>
+  <div class="d-flex justify-content-center">
+    {% if page_obj.has_previous %}
+    <button type="button" class="btn btn-info btn-sm"><a href="?page=1" style="color: white;">&laquo; first</a></button>
+    <button type="button" class="btn btn-info btn-sm"><a href="?page={{ page_obj.previous_page_number}}"style="color: white;">previous</a></button>
+    {% endif %}
+    {% if page_obj.has_next %}
+    <button type="button" class="btn btn-info btn-sm"><a href="?page={{ page_obj.next_page_number }}" style="color: white;">next</a></button>
+    <button type="button" class="btn btn-info btn-sm"><a href="?page={{ page_obj.paginator.num_pages }}" style="color: white;">last</a></button>
+    {% endif %}
+  </div>
+  
+  <div class="footer">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="list-group">
+            <ul class="list-unstyled">
+              <li><i class="fas fa-phone-volume"></i> Call us on:</li>
+              <li><i class="fas fa-mobile"></i> +254 710 934650</li>
+              <br>
+              <li><i class="fas fa-mobile"></i> +254 794 301306</li>
+            </ul>
+          </div>
+        </div> 
+        <div class="col-md-4">
+          <div class="list-group">
+            <ul class="list-unstyled">
+              <li>Follow Us:</li>
+              <li>FaceBook <i class="fab fa-facebook"></i></li>
+              <li>Instagram <i class="fab fa-instagram"></i></li>
+              <li>Twitter <i class="fab fa-twitter"></i></li>
+            </ul>
+          </div>
+        </div> 
+        <div class="col-md-4">
+          <h6 class="navbar-brand">Sweet Delight</h6>
+        </div> 
+      </div>
+    </div>
+  </div>
+  <!-- pagination end-->
+  <!-- card-section end-->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
